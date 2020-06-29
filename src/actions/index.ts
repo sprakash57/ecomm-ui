@@ -1,5 +1,5 @@
-import { FETCH_BOOKS, BOOKS_SAGA } from '../constants';
+import { FETCH_BOOKS, FETCH_BBOKS_RESOLVED } from '../constants';
 import { IBooks } from '../interfaces';
 
-export const fetchBooks = () => ({ type: FETCH_BOOKS });
-export const booksSaga = (data: IBooks[] | { message: string }) => ({ type: BOOKS_SAGA, data });
+export const fetchBooks = () => ({ type: FETCH_BOOKS })
+export const fetchBooksResolved = (data: IBooks[] | { message: string }) => ({ type: FETCH_BBOKS_RESOLVED, data });

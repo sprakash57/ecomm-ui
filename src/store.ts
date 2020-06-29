@@ -4,7 +4,7 @@ import rootReducer from './reducer';
 import rootSaga from './saga';
 
 const saga = createSagaMiddleware();
-const store = createStore(rootReducer, {}, applyMiddleware(saga));
+const store = createStore(rootReducer, applyMiddleware(saga));
 
 saga.run(rootSaga);
 
