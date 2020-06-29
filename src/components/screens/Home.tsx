@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch, AnyAction } from 'redux';
 import { fetchBooks } from '../../actions';
 import Book from '../common/Book';
+import NavHeader from '../common/NavHeader';
 
 interface IProps {
     fetchBooks(): void,
@@ -47,12 +48,15 @@ const Home: React.FC<IProps> = (props) => {
     }, [props])
 
     return (
-        <main className='book-card'>
-            <ul>
-                {pagination.items.length ? pagination.items.map(book => <Book key={book.id} content={book} />) : null}
-            </ul>
-            {showMore && <button onClick={handleShowMore} className='btn-link'>Show More</button>}
-        </main>
+        <>
+            <NavHeader title='' />
+            <main className='book-card'>
+                <ul>
+                    {pagination.items.length ? pagination.items.map(book => <Book key={book.id} content={book} />) : null}
+                </ul>
+                {showMore && <button onClick={handleShowMore} className='btn-link'>Show More</button>}
+            </main>
+        </>
     )
 }
 

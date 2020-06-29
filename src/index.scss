@@ -19,6 +19,13 @@ nav {
   }
 }
 
+@mixin btn {
+  padding: 5px;
+  background: #8B4513;
+  color: white;
+  text-decoration: none;
+}
+
 .book-card {
   padding: 2rem;
 
@@ -57,14 +64,11 @@ nav {
         }
 
         a {
+          @include btn();
           width: 90%;
           margin: 5px auto;
-          padding: 5px;
           display: flex;
           justify-content: center;
-          background: #8B4513;
-          color: white;
-          text-decoration: none;
         }
       }
     }
@@ -80,5 +84,32 @@ nav {
   &:hover {
     cursor: pointer;
     text-decoration: underline;
+  }
+}
+
+.book-container {
+  display: flex;
+  padding: 15px;
+  h1 {
+    margin-bottom: 0px;
+    font-size: 1.5rem;
+    margin-top: 10px;
+  }
+  p {
+    margin-bottom: 0px;
+  }
+  summary {
+    background: lightgrey;
+    border-radius: 2px;
+    padding: 10px;
+  }
+}
+
+.book-btn {
+  margin: 10px 0;
+  > button {
+    @include btn();
+    border: none;
+    margin-right: 15px;
   }
 }

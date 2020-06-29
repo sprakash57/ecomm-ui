@@ -1,7 +1,5 @@
-import { Interface } from "readline"
-
 export interface IBooks {
-    id: number,
+    id: string,
     title: string,
     desc: string,
     author: string,
@@ -22,7 +20,7 @@ export interface IState {
 }
 
 export interface IBookDetailsProps {
-    match: { params: { _id: string } }
+    match: { params: { id: string } }
 }
 
 export interface IUserDetailProps extends IBookDetailsProps {
