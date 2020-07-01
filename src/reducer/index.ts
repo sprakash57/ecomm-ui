@@ -1,18 +1,25 @@
-import { combineReducers, Action } from 'redux';
-import { FETCH_BBOKS_RESOLVED } from '../constants';
-import { IBooks } from '../interfaces';
+import { combineReducers } from 'redux';
+import { FETCH_BBOKS_RESOLVED, ADD_TO_CART, SAVE_ADDRESS, CHECKOUT } from '../constants';
+import { IAction } from '../interfaces';
 
 const initState = {
     books: [],
     orders: [],
-    cart: []
+    cart: [],
+    address: null
 }
 
-const reducer = (state: any = initState, action: { type: string, data: IBooks[] | { message: string } }) => {
+const reducer = (state: any = initState, action: IAction) => {
     const { type, data } = action;
     switch (type) {
         case FETCH_BBOKS_RESOLVED:
             return { ...state, books: data }
+        case ADD_TO_CART:
+            return { ...state, cart: [...state.cart, data] }
+        case SAVE_ADDRESS:
+            return { ...state, address: data }
+        case CHECKOUT:
+            return { ...state, orders: state.cart, cart: [] }
         default:
             return state
     }

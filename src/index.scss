@@ -24,6 +24,7 @@ nav {
   background: #8B4513;
   color: white;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .book-card {
@@ -111,5 +112,26 @@ nav {
     @include btn();
     border: none;
     margin-right: 15px;
+  }
+}
+
+.cart-main {
+  padding: 10px;
+  display: flex;
+}
+
+.address {
+  margin-right: 10rem;
+  > form button {
+    margin-top: 10px;
+    margin-right: 5px;
+  }
+}
+
+.payment {
+  width: 300px;
+  > article {
+    display: flex;
+    justify-content: space-between;
   }
 }

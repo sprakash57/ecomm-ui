@@ -12,7 +12,8 @@ export interface IBooks {
 export interface IReducer {
     books: IBooks[],
     orders: IBooks[],
-    cart: IBooks[]
+    cart: IBooks[],
+    address: IAddress
 }
 
 export interface IState {
@@ -23,6 +24,15 @@ export interface IBookDetailsProps {
     match: { params: { id: string } }
 }
 
-export interface IUserDetailProps extends IBookDetailsProps {
-    reducer: IReducer
+export interface IAction {
+    type: string,
+    data: IBooks[] | { message: string } | IBooks
+}
+
+export interface IAddress {
+    address1: string,
+    address2: string,
+    city: string,
+    state: string,
+    country: string
 }

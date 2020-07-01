@@ -3,13 +3,20 @@ import React, { useEffect, useState } from 'react';
 import NavHeader from '../common/NavHeader';
 import { connect } from 'react-redux';
 import { IState, IBooks, IBookDetailsProps } from '../../interfaces';
+import { addToCart } from '../../actions';
+import { bindActionCreators, Dispatch, AnyAction } from 'redux';
 
 interface IProps extends IBookDetailsProps {
-    books: IBooks[]
+    books: IBooks[],
+    addToCart(currentBook: IBooks | undefined): void
 }
 
 const Description: React.FC<IProps> = props => {
     const [currentBook, setCurrentBook] = useState<IBooks>();
+
+    const handleAddCart = () => {
+        props.addToCart(currentBook);
+    }
 
     useEffect(() => {
         const currentBook = props.books.find(book => book.id === props.match.params.id);
@@ -32,7 +39,7 @@ const Description: React.FC<IProps> = props => {
                         <p>ISBN: {currentBook?.ISBN}</p>
                     </section>
                     <section className='book-btn'>
-                        <button>Add to cart</button>
+                        <button onClick={handleAddCart}>Add to cart</button>
                         <button>Buy Now</button>
                     </section>
                     <summary>{currentBook?.desc}</summary>
@@ -43,5 +50,6 @@ const Description: React.FC<IProps> = props => {
 }
 
 const mapState = (state: IState) => ({ books: state.reducer.books })
+const mapDispatch = (dispatch: Dispatch<AnyAction>) => bindActionCreators({ addToCart }, dispatch);
 
-export default connect(mapState)(Description);
+export default connect(mapState, mapDispatch)(Description);
