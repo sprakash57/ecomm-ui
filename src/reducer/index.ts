@@ -19,7 +19,7 @@ const reducer = (state: any = initState, action: IAction) => {
         case SAVE_ADDRESS:
             return { ...state, address: data }
         case CHECKOUT:
-            return { ...state, orders: state.cart, cart: [] }
+            return { ...state, orders: data, cart: [] }
         default:
             return state
     }

@@ -118,6 +118,36 @@ nav {
 .cart-main {
   padding: 10px;
   display: flex;
+  justify-content: center;
+  input {
+    width: 200px;
+    margin-bottom: 10px;
+  }
+  [placeholder="City"], [placeholder="State"] {
+    width: 90px;
+    margin-right: 13px;
+  }
+  button {
+    @include btn();
+    border: none;
+    margin-right: 15px;
+    margin-top: 20px;
+  }
+  a {
+    margin-top: 20px;
+  }
+}
+
+.cart-bag {
+  overflow-y: scroll;
+  height: 90px;
+  padding: 5px;
+  background: #ebc0b9;
+  > p {
+    font-size: smaller;
+    margin-top: 2px;
+    margin-bottom: 2px;
+  }
 }
 
 .address {
@@ -134,4 +164,23 @@ nav {
     display: flex;
     justify-content: space-between;
   }
+  p {
+    margin-top: 3px;
+  }
+}
+
+.order {
+  border: 1px solid;
+  margin: 15px 5rem 15px 5rem;
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  background: #ebc0b9;
+  padding: 0 15px 0 15px;
+}
+
+.order-summary {
+  display: flex;
 }

@@ -3,10 +3,10 @@ import NavHeader from '../common/NavHeader';
 import { connect } from 'react-redux';
 import { IState, IBooks, IAddress } from '../../interfaces';
 import { Link } from 'react-router-dom';
-import { saveAddress } from '../../actions';
+import { saveAddress, checkout } from '../../actions';
 import { bindActionCreators, Dispatch, AnyAction } from 'redux';
 
-type IProps = { state: { cart: IBooks[], address: IAddress }, saveAddress(data: IAddress): void }
+type IProps = { state: { cart: IBooks[], address: IAddress }, saveAddress(data: IAddress): void, checkout(data: IBooks[]): void }
 
 const Cart: React.FC<IProps> = (props) => {
     const [details, setDetails] = useState({
@@ -30,7 +30,13 @@ const Cart: React.FC<IProps> = (props) => {
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
-        console.log(address)
+        const { cart } = props.state;
+        const order = cart.map(item => ({
+            ...item,
+            createdAt: Date.now()
+        }));
+        props.checkout(order);
+        alert('Order placed');
     }
 
     const handleEdit = () => {
@@ -80,8 +86,11 @@ const Cart: React.FC<IProps> = (props) => {
                     </section>
                     <section>
                         <h3>Shopping Bag</h3>
-                        <section></section>
+                        <section className='cart-bag'>
+                            {props.state.cart.map(item => <p key={item.id}>{item.title}</p>)}
+                        </section>
                         <section className='payment'>
+                            <h3>Payment info</h3>
                             <article>
                                 <p>Item Price</p>
                                 <p>&#8377; {details.price}</p>
@@ -112,6 +121,6 @@ const Cart: React.FC<IProps> = (props) => {
 }
 
 const mapState = (state: IState) => ({ state: state.reducer });
-const mapDispatch = (dispatch: Dispatch<AnyAction>) => bindActionCreators({ saveAddress }, dispatch)
+const mapDispatch = (dispatch: Dispatch<AnyAction>) => bindActionCreators({ saveAddress, checkout }, dispatch)
 
 export default connect(mapState, mapDispatch)(Cart);

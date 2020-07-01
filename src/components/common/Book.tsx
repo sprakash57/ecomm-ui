@@ -15,7 +15,7 @@ const Book: React.FC<IProps> = (props) => {
             </figure>
             <summary>{title}</summary>
             <p>{desc.substring(0, 50)}</p>
-            <Link to={`/${id}`}>Buy now</Link>
+            <Link to={`/${id}`}>Buy</Link>
         </li>
     )
 }

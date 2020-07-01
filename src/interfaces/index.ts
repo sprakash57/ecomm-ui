@@ -6,7 +6,8 @@ export interface IBooks {
     ISBN: string,
     price: number,
     pages: string,
-    image: string
+    image: string,
+    createdAt?: number
 }
 
 export interface IReducer {

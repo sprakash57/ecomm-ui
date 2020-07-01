@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { IState, IBooks, IBookDetailsProps } from '../../interfaces';
 import { addToCart } from '../../actions';
 import { bindActionCreators, Dispatch, AnyAction } from 'redux';
+import { Redirect } from 'react-router-dom';
 
 interface IProps extends IBookDetailsProps {
     books: IBooks[],
@@ -13,15 +14,26 @@ interface IProps extends IBookDetailsProps {
 
 const Description: React.FC<IProps> = props => {
     const [currentBook, setCurrentBook] = useState<IBooks>();
+    const [bought, setBought] = useState(false);
 
     const handleAddCart = () => {
         props.addToCart(currentBook);
+        alert('Added to cart');
+    }
+
+    const handleBuyNow = () => {
+        props.addToCart(currentBook);
+        setBought(true);
     }
 
     useEffect(() => {
         const currentBook = props.books.find(book => book.id === props.match.params.id);
         setCurrentBook(currentBook);
     }, [props.books]);
+
+    if (bought) {
+        return <Redirect to='/cart' />
+    }
 
     return (
         <>
@@ -40,7 +52,7 @@ const Description: React.FC<IProps> = props => {
                     </section>
                     <section className='book-btn'>
                         <button onClick={handleAddCart}>Add to cart</button>
-                        <button>Buy Now</button>
+                        <button onClick={handleBuyNow}>Buy Now</button>
                     </section>
                     <summary>{currentBook?.desc}</summary>
                 </section>
