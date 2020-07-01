@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux';
 import { FETCH_BBOKS_RESOLVED, ADD_TO_CART, SAVE_ADDRESS, CHECKOUT } from '../constants';
-import { IAction } from '../interfaces';
 
 const initState = {
     books: [],
@@ -9,7 +8,7 @@ const initState = {
     address: null
 }
 
-const reducer = (state: any = initState, action: IAction) => {
+const reducer = (state: any = initState, action: any) => {
     const { type, data } = action;
     switch (type) {
         case FETCH_BBOKS_RESOLVED:
@@ -19,7 +18,7 @@ const reducer = (state: any = initState, action: IAction) => {
         case SAVE_ADDRESS:
             return { ...state, address: data }
         case CHECKOUT:
-            return { ...state, orders: data, cart: [] }
+            return { ...state, orders: [...state.orders, ...data], cart: [] }
         default:
             return state
     }
